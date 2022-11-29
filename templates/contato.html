@@ -28,17 +28,17 @@
         <h2>Entre em contato</h2>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit, saepe.</p>
         <hr>
-        <form>
+        <form method="POST" action="/contato" name="cadastro">
             Seu e-mail:<br>
-                <input type="email" name="Seu e-mail">
+                <input type="email" name="email" required>
             <br>
             Assunto:<br>
-                <input type="text" name="Assunto">
+                <input type="text" name="assunto" required>
                 <br>
             Descrição:<br>
-                <textarea rows="2" cols="21" id="descricao" name="descricao" maxlength="300" minlength="20"></textarea>
+                <textarea rows="2" cols="21" id="descricao" name="descricao" maxlength="300" minlength="20" required></textarea>
                 <br>
-            <input type="submit" value="Enviar">
+            <button type="submit" value="Enviar">Enviar</button>
         </form>
         <footer>
             <h5>Todos os direitos reservados</h5>
@@ -46,3 +46,28 @@
     </main>
 </body>
 </html>
+
+
+<!-- <form method="POST" action="/contato" name="cadastro">
+    Seu e-mail:<br>
+        <input type="email" name="ctto_email" required>
+    <br>
+    Assunto:<br>
+        <input type="text" name="Assunto">
+        <br>
+    Descrição:<br>
+        <textarea rows="2" cols="21" id="descricao" name="descricao" maxlength="300" minlength="20"></textarea>
+        <br>
+    <input type="submit" value="Enviar">
+</form> -->
+
+
+<!-- Seu e-mail:<br>
+<input type="email" name="ctto_email" required>
+<br>
+Assunto:<br>
+<input type="text" name="ctto_assunto" required>
+<br>
+Descrição:<br>
+<textarea rows="2" cols="21" id="descricao" name="ctto_descricao" maxlength="300" minlength="20" required></textarea>
+<br> -->
