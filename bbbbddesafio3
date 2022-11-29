@@ -1,26 +1,23 @@
-import mysql.connector
+# import mysql.connector
 
-conexao = mysql.connector.connect(
-    host = 'localhost',
-    user = 'root',
-    password = 'lequinha',
-    database = 'dbdesafio3jean',
-) 
+# conexao = mysql.connector.connect(
+#     host = 'localhost',
+#     user = 'root',
+#     password = 'lequinha',
+#     database = 'dbdesafio3jean',
+# ) 
 
-cursor = conexao.cursor()
+# cursor = conexao.cursor()
 
-# #CRUD 
+# # #CRUD 
 
-email = "adffsadfo@terceiro.com.br"
-assunto = "afdasfsdgga"
-descricao = "udlfjsaoidjkdsjfosiea"
-comando = f'INSERT INTO contato (ctto_email, ctto_assunto, ctto_descricao) VALUE ("{email}", "{assunto}", "{descricao}")'
-cursor.execute(comando)
-conexao.commit() # edita o bando de dados
-resultado = cursor.fetchall() # ler o banco de dados
 
-cursor.close()
-conexao.close()
+
+# conexao.commit() # edita o bando de dados
+# resultado = cursor.fetchall() # ler o banco de dados
+
+# cursor.close()
+# conexao.close()
 
 # # CREATE 'etapa de criar dados'
 # # email = "segundo@segundo.com.br"

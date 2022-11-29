@@ -1,0 +1,130 @@
+from flask import Flask,render_template, request
+from flask_mysqldb import MySQL
+import mysql.connector
+ 
+app = Flask(__name__)
+ 
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = 'lequinha'
+app.config['MYSQL_DB'] = 'dbdesafio3jean'
+ 
+mysql = MySQL(app)
+
+#Creating a connection cursor
+# cursor = mysql.connection.cursor()
+cursor = mysql.connectiononector()
+
+ 
+#Executing SQL Statements
+
+Seu_e_mail = 'terceiro@terceiro.com.br'
+Assunto = 'terceiro'
+Descrição = 'terceira edição'
+cursor.execute = f'INSERT INTO contato (ctto_email, ctto_assunto, ctto_descricao) VALUE ("{Seu_e_mail}", "{Assunto}", "{Descrição}")'
+
+# comando = f'INSERT INTO contato (ctto_email, ctto_assunto, ctto_descricao) VALUE ("{Seu_e_mail}", "{Assunto}", "{Descrição}")'
+# cursor.execute(comando)
+ 
+#Saving the Actions performed on the DB
+mysql.connection.commit()
+ 
+#Closing the cursor
+cursor.close()
+
+
+
+ 
+@app.route('/contato')
+def contato():
+    return render_template('contato.html')
+ 
+@app.route('/contato', methods = ['POST', 'GET'])
+def contato():
+    # if request.method == 'GET':
+    #     return "Login via the login Form"
+     
+    if request.method == 'POST':
+        Seu_e_mail = request.form['ctto_email']
+        Assunto = request.form['ctto_assunto']
+        Descrição = request.form['ctto_descricao']
+
+        cursor = mysql.connection.cursor()
+        cursor.execute = f'INSERT INTO contato (ctto_email, ctto_assunto, ctto_descricao) VALUE ("{Seu_e_mail}", "{Assunto}", "{Descrição}")'
+    
+        mysql.connection.commit()
+    
+        cursor.close()
+    
+        return f"Dados enviados!!"
+
+    return render_template('contatos.html')
+
+
+
+
+    
+ 
+# app.run(host='localhost', port=5000)
+
+# <form action="/contato" method = "POST">
+#    <p>Seu_e_mail <input type = "text" Seu_e_mail = "ctto_email" /></p>
+#    <p>Assunto <input type = "text" Assunto = "ctto_assunto" /></p>
+#    <p>Descrição <input type = "integer" Descrição = "ctto_descricao" /></p>
+# </form>
+
+# import mysql.connector
+
+# conexao = mysql.connector.connect(
+#     host = 'localhost',
+#     user = 'root',
+#     password = 'lequinha',
+#     database = 'dbdesafio3jean',
+# ) 
+
+# cursor = conexao.cursor()
+
+# # #CRUD 
+
+# email = "adffsadfo@terceiro.com.br"
+# assunto = "afdasfsdgga"
+# descricao = "udlfjsaoidjkdsjfosiea"
+# comando = f'INSERT INTO contato (ctto_email, ctto_assunto, ctto_descricao) VALUE ("{email}", "{assunto}", "{descricao}")'
+# cursor.execute(comando)
+# conexao.commit() # edita o bando de dados
+# resultado = cursor.fetchall() # ler o banco de dados
+
+# cursor.close()
+# conexao.close()
+
+# # CREATE 'etapa de criar dados'
+# # email = "segundo@segundo.com.br"
+# # assunto = "jabuticaba"
+# # descricao = "é redonda na cor preta"
+# # comando = f'INSERT INTO contato (ctto_email, ctto_assunto, ctto_descricao) VALUE ("{email}", "{assunto}", "{descricao}")'
+# # cursor.execute(comando)
+# # conexao.commit() # edita o bando de dados
+
+
+# # READ
+# # comando = f'SELECT * FROM contato'
+# # cursor.execute(comando)
+# # conexao.commit() #edita o bando de dados
+# # resultado = cursor.fetchall() # ler o bando de dados
+# # print(resultado)
+
+# # UPDATE
+# email = "Rsegundo@segundo.com.br"
+# # assunto = "Rjabuticaba"
+# # descricao = "R é redonda na cor preta"
+# comando = f'UPDATE contato SET ctto_email = "{email}" WHERE ctto_email = "{email}"'
+# # comando = f'UPDATE contato SET ctto_assunto = "{assunto}" WHERE ctto_assunto = "{assunto}"'
+# # comando = f'UPDATE contato SET ctto_descricao = "{descricao}" WHERE ctto_descricao = "{descricao}"'
+# cursor.execute(comando)
+# conexao.commit() # edita o bando de dados
+
+# # DELETE
+# email = "aeiou@aeiou.com"
+# comando = f'DELETE FROM contato WHERE ctto-email = "{email}"'
+# cursor.execute(comando)
+# conexao.commit() #edita o bando de dados
