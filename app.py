@@ -47,10 +47,10 @@ def contato():
 
 # rota usuários para listar todos os usuário no banco de dados.
 @app.route('/contato')
-def users():
+def contato():
     cur = mysql.connection.cursor()
 
-    users = cur.execute("SELECT * FROM ccontato")
+    users = cur.execute("SELECT * FROM contato")
 
     if users > 0:
         userDetails = cur.fetchall()
