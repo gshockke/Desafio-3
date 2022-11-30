@@ -1,19 +1,75 @@
-from flask import Flask, render_template
-# from flask_bootstrap import Bootstrap
-# from flask_mysqldb import MySql
+from flask import Flask, render_template, request, url_for, jsonify
+from flask_mysqldb import MySQL
 
 
-app = Flask("__name__")
+def create_app():
+    from app import routes
+    routes.init_app(app)
+    return app
+
+app = Flask('__name__')
 
 
-@app.route("/")
+# @app.route('/')
+# def home():
+#     return render_template('home.html')
+
+# @app.route('/quem_somos')
+# def quem_somos():
+#     return render_template('quem_somos.html')
+
+# @app.route('/contato')
+# def contato():
+#     return render_template('contato.html')
+
+
+# conexão com o banco de dados
+app.config['MYSQL_Host'] = 'localhost' # 127.0.0.1
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = 'lequinha'
+app.config['MYSQL_DB'] = 'unes'
+
+mysql = MySQL(app)
+
+
+@app.route('/')
 def home():
     return render_template('home.html')
 
-@app.route("/quem_somos")
+@app.route('/quem_somos')
 def quem_somos():
     return render_template('quem_somos.html')
 
-@app.route("/contato")
+
+@app.route('/contato', methods=['GET', 'POST'])
 def contato():
+    if request.method == 'POST':
+        email = request.form['email']
+        assunto = request.form['assunto']
+        descricao = request.form['descricao']
+        
+        cur = mysql.connection.cursor()
+        cur.execute("INSERT INTO contatos(ctto_email, ctto_assunto, ctto_descricao) VALUES (%s, %s, %s)", (email, assunto, descricao))
+       
+        mysql.connection.commit()
+        
+        cur.close()
+
+        return 'sucesso'
     return render_template('contato.html')
+
+
+# rota usuários para listar todos os usuário no banco de dados.
+@app.route('/contato')
+def users():
+    cur = mysql.connection.cursor()
+
+    users = cur.execute("SELECT * FROM contato")
+
+    if users > 0:
+        userDetails = cur.fetchall()
+
+        return render_template('contato.html', userDetails=userDetails)
+
+
+   
