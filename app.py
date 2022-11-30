@@ -49,7 +49,7 @@ def contato():
         descricao = request.form['descricao']
         
         cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO contatos(ctto_email, ctto_assunto, ctto_descricao) VALUES (%s, %s, %s)", (email, assunto, descricao))
+        cur.execute("INSERT INTO contatos(email, assunto, descricao) VALUES (%s, %s, %s)", (email, assunto, descricao))
        
         mysql.connection.commit()
         
@@ -64,7 +64,7 @@ def contato():
 def users():
     cur = mysql.connection.cursor()
 
-    users = cur.execute("SELECT * FROM contato")
+    users = cur.execute("SELECT * FROM ccontato")
 
     if users > 0:
         userDetails = cur.fetchall()
