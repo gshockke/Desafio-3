@@ -9,25 +9,11 @@ def create_app():
 
 app = Flask('__name__')
 
-
-# @app.route('/')
-# def home():
-#     return render_template('home.html')
-
-# @app.route('/quem_somos')
-# def quem_somos():
-#     return render_template('quem_somos.html')
-
-# @app.route('/contato')
-# def contato():
-#     return render_template('contato.html')
-
-
 # conexão com o banco de dados
 app.config['MYSQL_Host'] = 'localhost' # 127.0.0.1
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'lequinha'
-app.config['MYSQL_DB'] = 'unes'
+app.config['MYSQL_DB'] = 'dbdesafio3jean'
 
 mysql = MySQL(app)
 
@@ -49,13 +35,13 @@ def contato():
         descricao = request.form['descricao']
         
         cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO contatos(email, assunto, descricao) VALUES (%s, %s, %s)", (email, assunto, descricao))
+        cur.execute("INSERT INTO contato(ctto_email, ctto_assunto, ctto_descricao) VALUES (%s, %s, %s)", (email, assunto, descricao))
        
         mysql.connection.commit()
         
         cur.close()
 
-        return 'sucesso'
+        return 'Dados cadastrados com sucesso'
     return render_template('contato.html')
 
 
